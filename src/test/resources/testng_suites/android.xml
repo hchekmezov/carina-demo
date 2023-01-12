@@ -20,6 +20,7 @@
 	<test name="Mobile test">
 		<classes>
 			<class name="com.qaprosoft.carina.demo.MobileSampleTest" />
+			<class name="com.qaprosoft.carina.demo.myMobile.MyMobileTest" />
 		</classes>
 	</test>
 
