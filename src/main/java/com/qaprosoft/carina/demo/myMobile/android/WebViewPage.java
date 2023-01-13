@@ -10,13 +10,18 @@ import org.openqa.selenium.support.FindBy;
 public class WebViewPage extends WebViewPageBase {
 
     @FindBy(id = "com.solvd.carinademoapplication:id/toolbar")
-    protected ExtendedWebElement toolbar;
+    private ExtendedWebElement toolbar;
+
+//    TODO: how to get page title?
+//    @FindBy(linkText = "Web View")
+//    private ExtendedWebElement title;
+
     public WebViewPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public boolean isPageOpened() {
+    public boolean isOpened() {
         return toolbar.isElementPresent();
     }
 

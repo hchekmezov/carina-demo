@@ -11,23 +11,23 @@ import org.openqa.selenium.support.FindBy;
 public class WelcomePage extends WelcomePageBase {
 
     @FindBy(id = "com.solvd.carinademoapplication:id/next_button")
-    protected ExtendedWebElement nextBtn;
+    private ExtendedWebElement nextButton;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/carina_logo")
-    protected ExtendedWebElement carinaLogo;
+    private ExtendedWebElement carinaLogo;
 
     public WelcomePage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public boolean isPageOpened() {
-        return nextBtn.isElementPresent();
+    public boolean isOpened() {
+        return nextButton.isElementPresent() && carinaLogo.isElementPresent();
     }
 
     @Override
-    public LoginPageBase openLoginPageByClickNextBtn() {
-        nextBtn.click();
+    public LoginPageBase clickNextButton() {
+        nextButton.click();
         return initPage(getDriver(), LoginPageBase.class);
     }
 }

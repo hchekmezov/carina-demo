@@ -11,22 +11,22 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends LoginPageBase {
 
     @FindBy(id = "com.solvd.carinademoapplication:id/name")
-    protected ExtendedWebElement nameField;
+    private ExtendedWebElement nameField;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/password")
-    protected ExtendedWebElement passwordField;
+    private ExtendedWebElement passwordField;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/radio_female")
-    protected ExtendedWebElement radioFemale;
+    private ExtendedWebElement radioFemale;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/radio_male")
-    protected ExtendedWebElement radioMale;
+    private ExtendedWebElement radioMale;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/checkbox")
-    protected ExtendedWebElement privateCheckbox;
+    private ExtendedWebElement privacyCheckbox;
 
     @FindBy(id = "com.solvd.carinademoapplication:id/login_button")
-    protected ExtendedWebElement signUpBtn;
+    private ExtendedWebElement signUpButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -43,78 +43,86 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public void checkMailRadioButton() {
-        radioMale.click();
+    public void checkRadioElement(String elementName) {
+        if (elementName.equalsIgnoreCase("radio_female")) {
+            radioFemale.check();
+        } else if (elementName.equalsIgnoreCase("radio_male")) {
+            radioMale.check();
+        } else {
+            privacyCheckbox.check();
+        }
     }
 
     @Override
-    public void checkPrivacyCheckbox() {
-        privateCheckbox.click();
+    public boolean isOpened() {
+        return isElementPresent("name") && isElementPresent("radio_male");
     }
 
     @Override
-    public boolean isPageOpened() {
-        return signUpBtn.isElementPresent();
+    public String getTextInField(String fieldName) {
+        String text = "text";
+        if (fieldName.equalsIgnoreCase("password")) {
+            return passwordField.getAttribute(text);
+        } else if (fieldName.equalsIgnoreCase("name")) {
+            return nameField.getAttribute(text);
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public boolean isTypedCorrectName(String name) {
-        return nameField.getAttribute("text").equals(name);
+    public boolean isElementPresent(String elementName) {
+        switch (elementName) {
+            case "name":
+                return nameField.isElementPresent();
+            case "password":
+                return passwordField.isElementPresent();
+            case "radio_male":
+                return radioMale.isElementPresent();
+            case "radio_female":
+                return radioFemale.isElementPresent();
+            case "checkbox":
+                return privacyCheckbox.isElementPresent();
+            default:
+                return false;
+        }
+    }
+
+
+    @Override
+    public boolean isElementUnchecked(String elementName) {
+        if (elementName.equalsIgnoreCase("radio_male")) {
+            return !radioMale.isChecked(); // there is no .isUnchecked()-method
+        } else if (elementName.equalsIgnoreCase("radio_female")) {
+            return !radioFemale.isChecked();
+        } else if (elementName.equalsIgnoreCase("checkbox")) {
+            return !privacyCheckbox.isChecked();
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public boolean isTypedCorrectPassword(String password) {
-        return passwordField.getAttribute("text").equals(password);
+    public boolean isElementsChecked(String elementName) {
+        if (elementName.equalsIgnoreCase("radio_male")) {
+            return radioMale.isChecked();
+        } else if (elementName.equalsIgnoreCase("radio_female")) {
+            return radioFemale.isChecked();
+        } else if (elementName.equalsIgnoreCase("checkbox")) {
+            return privacyCheckbox.isChecked();
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public boolean isNameFieldPresent() {
-        return nameField.isElementPresent();
+    public boolean isSignUpButtonEnabled() {
+        return Boolean.parseBoolean(signUpButton.getAttribute("enabled"));
     }
 
     @Override
-    public boolean isPasswordFieldPresent() {
-        return passwordField.isElementPresent();
-    }
-
-    @Override
-    public boolean isMaleRadioPresent() {
-        return radioMale.isElementPresent();
-    }
-
-    @Override
-    public boolean isFemaleRadioPresent() {
-        return radioFemale.isElementPresent();
-    }
-
-    @Override
-    public boolean isPrivacyCheckboxPresent() {
-        return privateCheckbox.isElementPresent();
-    }
-
-    @Override
-    public boolean isFemaleRadioUnchecked() {
-        return !radioFemale.isChecked();
-    }
-
-    @Override
-    public boolean isMaleRadioUnchecked() {
-        return !radioMale.isChecked();
-    }
-
-    @Override
-    public boolean isPrivacyCheckboxUnchecked() {
-        return !privateCheckbox.isChecked();
-    }
-
-    @Override
-    public boolean isSignUpBtnDisabled() {
-        return signUpBtn.getAttribute("enabled").equalsIgnoreCase("false");
-    }
-
-    @Override
-    public WebViewPageBase openWebViewPageByClickSignUpBtn() {
-        signUpBtn.click();
+    public WebViewPageBase clickSignUpButton() {
+        signUpButton.click();
         return initPage(getDriver(), WebViewPageBase.class);
     }
 }

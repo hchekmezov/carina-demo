@@ -10,41 +10,49 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MyMobileTest implements IAbstractTest, IMobileUtils {
-    String name = "John";
-    String password = "Doe";
+    final String name = "John";
+    final String password = "Doe";
 
     @Test()
-    @MethodOwner(owner = "gleb")
-    public void verifyLoginPage() {
+    @MethodOwner(owner = "hchekmezov")
+    public void verifyLoginPageTest() {
         WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
-        Assert.assertTrue(welcomePage.isPageOpened(), "Welcome page is not opened!");
-        LoginPageBase loginPage = welcomePage.openLoginPageByClickNextBtn();
-        Assert.assertTrue(loginPage.isPageOpened(), "Login page is not opened!");
+        Assert.assertTrue(welcomePage.isOpened(), "Welcome page is not opened!");
+        LoginPageBase loginPage = welcomePage.clickNextButton();
+        Assert.assertTrue(loginPage.isOpened(), "Login page is not opened!");
         // 1
-        Assert.assertTrue(loginPage.isNameFieldPresent(), "Name field is not present!");
-        Assert.assertTrue(loginPage.isPasswordFieldPresent(), "Password field is not present");
-        Assert.assertTrue(loginPage.isFemaleRadioPresent(), "Female radio button is not present!");
-        Assert.assertTrue(loginPage.isMaleRadioPresent(), "Male radio button is not present!");
-        Assert.assertTrue(loginPage.isPrivacyCheckboxPresent(), "Privacy checkbox is not present!");
-        Assert.assertTrue(loginPage.isFemaleRadioUnchecked(), "Female radio button is checked!");
-        Assert.assertTrue(loginPage.isMaleRadioUnchecked(), "Male radio button is checked");
-        Assert.assertTrue(loginPage.isPrivacyCheckboxUnchecked(), "Privacy checkbox is checked!");
-        Assert.assertTrue(loginPage.isSignUpBtnDisabled(), "Sign up button is enabled!");
+        Assert.assertTrue(loginPage.isElementPresent("name"), "Name field is not present!");
+        Assert.assertTrue(loginPage.isElementPresent("password"), "Password field is not present");
+        Assert.assertTrue(loginPage.isElementPresent("radio_female"), "Female radio button " +
+                "is not present!");
+        Assert.assertTrue(loginPage.isElementPresent("radio_male"), "Male radio button is not " +
+                "present!");
+        Assert.assertTrue(loginPage.isElementPresent("checkbox"), "Privacy checkbox is not " +
+                "present!");
+        Assert.assertTrue(loginPage.isElementUnchecked("radio_female"), "Female radio button is " +
+                "checked!");
+        Assert.assertTrue(loginPage.isElementUnchecked("radio_male"), "Male radio button is " +
+                "checked");
+        Assert.assertTrue(loginPage.isElementUnchecked("checkbox"), "Privacy checkbox is " +
+                "checked!");
         // 2
         loginPage.typeName(name);
         loginPage.typePassword(password);
-        Assert.assertTrue(loginPage.isTypedCorrectName(name), "Name is not typed!");
-        Assert.assertTrue(loginPage.isTypedCorrectPassword(password), "Password is not typed!");
+        Assert.assertEquals(loginPage.getTextInField("name"), name, "Name is not typed correctly!");
+        Assert.assertEquals(loginPage.getTextInField("password"), password, "Password is not typed " +
+                "correctly!");
         // 3
-        loginPage.checkMailRadioButton();
-        Assert.assertFalse(loginPage.isMaleRadioUnchecked(), "Male radio button is unchecked!");
+        loginPage.checkRadioElement("radio_male");
+        Assert.assertTrue(loginPage.isElementsChecked("radio_male"), "Male radio button " +
+                "is unchecked!");
         // 4
-        loginPage.checkPrivacyCheckbox();
-        Assert.assertFalse(loginPage.isPrivacyCheckboxUnchecked(), "Privacy checkbox is unchecked!");
+        loginPage.checkRadioElement("checkbox");
+        Assert.assertTrue(loginPage.isElementsChecked("checkbox"), "Privacy checkbox " +
+                "is unchecked!");
         // 5
-        Assert.assertFalse(loginPage.isSignUpBtnDisabled(), "Sign Up button is disabled!");
-        WebViewPageBase webViewPage = loginPage.openWebViewPageByClickSignUpBtn();
-        Assert.assertTrue(webViewPage.isPageOpened(), "Web View page is not opened, that means user is not logged in!");
+        WebViewPageBase webViewPage = loginPage.clickSignUpButton();
+        Assert.assertTrue(webViewPage.isOpened(), "Web View page is not opened, " +
+                "that means user is not logged in!");
         // 6
     }
 }

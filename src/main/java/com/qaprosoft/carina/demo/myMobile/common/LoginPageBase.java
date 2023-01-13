@@ -8,35 +8,24 @@ public abstract class LoginPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract WebViewPageBase openWebViewPageByClickSignUpBtn();
+    public abstract WebViewPageBase clickSignUpButton();
 
-    public abstract boolean isNameFieldPresent();
+    public abstract boolean isOpened();
 
-    public abstract boolean isPasswordFieldPresent();
+    public abstract boolean isElementPresent(String elementName);
 
-    public abstract boolean isMaleRadioPresent();
+    public abstract boolean isElementUnchecked(String elementName);
 
-    public abstract boolean isFemaleRadioPresent();
+    public abstract boolean isElementsChecked(String elementName);
 
-    public abstract boolean isPrivacyCheckboxPresent();
+    public abstract boolean isSignUpButtonEnabled();
 
-    public abstract boolean isFemaleRadioUnchecked();
-
-    public abstract boolean isMaleRadioUnchecked();
-
-    public abstract boolean isPrivacyCheckboxUnchecked();
-
-    public abstract boolean isSignUpBtnDisabled();
-
-    public abstract boolean isTypedCorrectName(String name);
-
-    public abstract boolean isTypedCorrectPassword(String password);
+    public abstract String getTextInField(String fieldName);
 
     public abstract void typeName(String name);
 
     public abstract void typePassword(String password);
 
-    public abstract void checkMailRadioButton();
+    public abstract void checkRadioElement(String elementName);
 
-    public abstract void checkPrivacyCheckbox();
 }
