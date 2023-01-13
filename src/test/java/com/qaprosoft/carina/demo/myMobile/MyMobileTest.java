@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MyMobileTest implements IAbstractTest, IMobileUtils {
+
     final String name = "John";
     final String password = "Doe";
 
