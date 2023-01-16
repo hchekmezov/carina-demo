@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = WelcomePageBase.class)
 public class WelcomePage extends WelcomePageBase {
 
+    private final String name = "Welcome Page";
+
     @FindBy(id = "com.solvd.carinademoapplication:id/next_button")
     private ExtendedWebElement nextButton;
 
@@ -29,5 +31,10 @@ public class WelcomePage extends WelcomePageBase {
     public LoginPageBase clickNextButton() {
         nextButton.click();
         return initPage(getDriver(), LoginPageBase.class);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

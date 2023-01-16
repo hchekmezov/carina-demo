@@ -1,14 +1,23 @@
 package com.qaprosoft.carina.demo.myMobile.android;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.demo.myMobile.android.additional.CheckableItem;
+import com.qaprosoft.carina.demo.myMobile.android.additional.LoginFormItem;
+import com.qaprosoft.carina.demo.myMobile.android.enums.LoginFields;
+import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
 import com.qaprosoft.carina.demo.myMobile.common.LoginPageBase;
 import com.qaprosoft.carina.demo.myMobile.common.WebViewPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase {
+
+    private final String name = "Login Page";
 
     @FindBy(id = "com.solvd.carinademoapplication:id/name")
     private ExtendedWebElement nameField;
@@ -28,6 +37,19 @@ public class LoginPage extends LoginPageBase {
     @FindBy(id = "com.solvd.carinademoapplication:id/login_button")
     private ExtendedWebElement signUpButton;
 
+    private final List<LoginFormItem> loginFormItems = Arrays.asList(
+            new LoginFormItem(driver, nameField),
+            new LoginFormItem(driver, passwordField),
+            new LoginFormItem(driver, radioMale),
+            new LoginFormItem(driver, radioFemale),
+            new LoginFormItem(driver, privacyCheckbox),
+            new LoginFormItem(driver, signUpButton));
+
+    private final List<CheckableItem> checkableItems = Arrays.asList(
+            new CheckableItem(driver, radioFemale),
+            new CheckableItem(driver, radioMale),
+            new CheckableItem(driver, privacyCheckbox));
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -43,76 +65,60 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public void checkRadioElement(String elementName) {
-        if (elementName.equalsIgnoreCase("radio_female")) {
+    public void checkSexRadioButton(Sex sex) {
+        if (sex.equals(Sex.FEMALE)) {
             radioFemale.check();
-        } else if (elementName.equalsIgnoreCase("radio_male")) {
+        } else if (sex.equals(Sex.MALE)) {
             radioMale.check();
-        } else {
-            privacyCheckbox.check();
         }
+    }
+
+    @Override
+    public void checkPrivacyCheckbox() {
+        privacyCheckbox.check();
     }
 
     @Override
     public boolean isOpened() {
-        return isElementPresent("name") && isElementPresent("radio_male");
+        return nameField.isElementPresent() && radioFemale.isElementPresent();
     }
 
     @Override
-    public String getTextInField(String fieldName) {
-        String text = "text";
-        if (fieldName.equalsIgnoreCase("password")) {
-            return passwordField.getAttribute(text);
-        } else if (fieldName.equalsIgnoreCase("name")) {
-            return nameField.getAttribute(text);
+    public String getTextInField(LoginFields loginField) {
+        if (loginField.equals(LoginFields.NAME)) {
+            return nameField.getText();
         } else {
-            return null;
+            return passwordField.getText();
         }
     }
 
     @Override
-    public boolean isElementPresent(String elementName) {
-        switch (elementName) {
-            case "name":
-                return nameField.isElementPresent();
-            case "password":
-                return passwordField.isElementPresent();
-            case "radio_male":
-                return radioMale.isElementPresent();
-            case "radio_female":
-                return radioFemale.isElementPresent();
-            case "checkbox":
-                return privacyCheckbox.isElementPresent();
-            default:
-                return false;
-        }
-    }
-
-
-    @Override
-    public boolean isElementUnchecked(String elementName) {
-        if (elementName.equalsIgnoreCase("radio_male")) {
-            return !radioMale.isChecked(); // there is no .isUnchecked()-method
-        } else if (elementName.equalsIgnoreCase("radio_female")) {
-            return !radioFemale.isChecked();
-        } else if (elementName.equalsIgnoreCase("checkbox")) {
-            return !privacyCheckbox.isChecked();
-        } else {
-            return false;
-        }
+    public List<LoginFormItem> getLoginFormItems() {
+        return loginFormItems;
     }
 
     @Override
-    public boolean isElementsChecked(String elementName) {
-        if (elementName.equalsIgnoreCase("radio_male")) {
+    public List<CheckableItem> getCheckableItems() {
+        return checkableItems;
+    }
+
+    @Override
+    public boolean isSexChecked(Sex sex) {
+        if (sex.equals(Sex.MALE)) {
             return radioMale.isChecked();
-        } else if (elementName.equalsIgnoreCase("radio_female")) {
-            return radioFemale.isChecked();
-        } else if (elementName.equalsIgnoreCase("checkbox")) {
-            return privacyCheckbox.isChecked();
         } else {
-            return false;
+            return radioFemale.isChecked();
         }
+    }
+
+    @Override
+    public boolean isPrivacyCheckboxChecked() {
+        return privacyCheckbox.isChecked();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -126,3 +132,4 @@ public class LoginPage extends LoginPageBase {
         return initPage(getDriver(), WebViewPageBase.class);
     }
 }
+

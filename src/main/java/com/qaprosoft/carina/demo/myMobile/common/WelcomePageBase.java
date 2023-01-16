@@ -12,4 +12,6 @@ public abstract class WelcomePageBase extends AbstractPage {
     public abstract LoginPageBase clickNextButton();
 
     public abstract boolean isOpened();
+
+    public abstract String getName();
 }

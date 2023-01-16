@@ -18,6 +18,8 @@
 *.apk
 !src/main/resources/carinademoexample.apk
 *.zip
+src/main/java/com/qaprosoft/carina/demo/myGameMobile
+src/main/resources/_config.properties
 !src/main/resources/carinademoexample.zip
 .settings/*
 target/*

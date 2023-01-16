@@ -9,12 +9,10 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = WebViewPageBase.class)
 public class WebViewPage extends WebViewPageBase {
 
+    private final String name = "Web View Page";
+
     @FindBy(id = "com.solvd.carinademoapplication:id/toolbar")
     private ExtendedWebElement toolbar;
-
-//    TODO: how to get page title?
-//    @FindBy(linkText = "Web View")
-//    private ExtendedWebElement title;
 
     public WebViewPage(WebDriver driver) {
         super(driver);
@@ -25,4 +23,8 @@ public class WebViewPage extends WebViewPageBase {
         return toolbar.isElementPresent();
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
 }
