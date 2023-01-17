@@ -1,13 +1,9 @@
 package com.qaprosoft.carina.demo.myMobile.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.myMobile.android.additional.CheckableItem;
-import com.qaprosoft.carina.demo.myMobile.android.enums.LoginFields;
-import com.qaprosoft.carina.demo.myMobile.android.additional.LoginFormItem;
+import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
 import org.openqa.selenium.WebDriver;
-
-import java.util.List;
 
 public abstract class LoginPageBase extends AbstractPage {
 
@@ -25,7 +21,13 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract boolean isSignUpButtonEnabled();
 
-    public abstract String getTextInField(LoginFields loginField);
+    public abstract boolean isSexElementPresent(Sex sex);
+
+    public abstract boolean isLoginFieldPresent(LoginField loginField);
+
+    public abstract boolean isPrivacyCheckboxPresent();
+
+    public abstract String getTextInField(LoginField loginField);
 
     public abstract void typeName(String name);
 
@@ -34,11 +36,4 @@ public abstract class LoginPageBase extends AbstractPage {
     public abstract void checkSexRadioButton(Sex sex);
 
     public abstract void checkPrivacyCheckbox();
-
-    public abstract List<LoginFormItem> getLoginFormItems();
-
-    public abstract List<CheckableItem> getCheckableItems();
-
-    public abstract String getName();
-
 }
