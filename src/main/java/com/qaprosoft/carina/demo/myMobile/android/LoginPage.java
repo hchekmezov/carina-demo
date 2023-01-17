@@ -73,7 +73,7 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public boolean isSexChecked(Sex sex) {
+    public boolean isSexRadioButtonChecked(Sex sex) {
         if (sex.equals(Sex.MALE)) {
             return radioMale.isChecked();
         } else {
@@ -92,7 +92,7 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public boolean isSexElementPresent(Sex sex) {
+    public boolean isSexRadioButtonPresent(Sex sex) {
         if (sex.equals(Sex.MALE)) {
             return radioMale.isElementPresent();
         } else {

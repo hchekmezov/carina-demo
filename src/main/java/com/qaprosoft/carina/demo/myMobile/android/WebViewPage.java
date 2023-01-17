@@ -11,10 +11,7 @@ public class WebViewPage extends WebViewPageBase {
     @FindBy(id = "com.solvd.carinademoapplication:id/toolbar")
     private ExtendedWebElement toolbar;
 
-    @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout" +
-            "/android.widget.FrameLayout/android.widget.LinearLayout/" +
-            "android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/" +
-            "android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+    @FindBy(xpath = "//android.widget.TextView[@text='Web View']")
     private ExtendedWebElement pageTitle;
 
     public WebViewPage(WebDriver driver) {

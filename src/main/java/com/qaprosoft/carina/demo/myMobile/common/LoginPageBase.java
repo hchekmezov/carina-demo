@@ -15,13 +15,13 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract boolean isOpened();
 
-    public abstract boolean isSexChecked(Sex sex);
+    public abstract boolean isSexRadioButtonChecked(Sex sex);
 
     public abstract boolean isPrivacyCheckboxChecked();
 
     public abstract boolean isSignUpButtonEnabled();
 
-    public abstract boolean isSexElementPresent(Sex sex);
+    public abstract boolean isSexRadioButtonPresent(Sex sex);
 
     public abstract boolean isLoginFieldPresent(LoginField loginField);
 
