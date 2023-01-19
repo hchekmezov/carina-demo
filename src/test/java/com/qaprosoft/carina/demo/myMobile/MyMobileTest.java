@@ -3,7 +3,9 @@ package com.qaprosoft.carina.demo.myMobile;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
+import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
 import com.qaprosoft.carina.demo.myMobile.common.LoginPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.MapPageBase;
 import com.qaprosoft.carina.demo.myMobile.common.WebViewPageBase;
 import com.qaprosoft.carina.demo.myMobile.common.WelcomePageBase;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
@@ -16,7 +18,18 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
     public static final String NAME = "John";
     public static final String PASSWORD = "Doe";
 
-    @Test()
+//    @BeforeMethod
+//    public void login() {
+//        WelcomePageBase welcomePageBase = initPage(getDriver(), WelcomePageBase.class);
+//        LoginPageBase loginPageBase = welcomePageBase.clickNextButton();
+//        loginPageBase.typeName(NAME);
+//        loginPageBase.typePassword(PASSWORD);
+//        loginPageBase.checkSexRadioButton(Sex.MALE);
+//        loginPageBase.checkPrivacyCheckbox();
+//        loginPageBase.clickSignUpButton();
+//    }
+
+    @Test(enabled = false)
     @MethodOwner(owner = "hchekmezov")
     public void verifyLoginPageTest() {
         // 1
@@ -25,6 +38,7 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
         LoginPageBase loginPage = welcomePage.clickNextButton();
         Assert.assertTrue(loginPage.isOpened(),
                 "[Welcome Page] Login Page is not opened after clicking Next Button!");
+        // Login page instead of Welcome Page?
         // 2
 //        for(LoginFields lf : LoginFields.values()) {
 //            Assert.assertTrue(loginPage.isLoginFieldPresent(lf),
@@ -76,5 +90,34 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
         WebViewPageBase webViewPage = loginPage.clickSignUpButton();
         Assert.assertTrue(webViewPage.isOpened(),
                 "[Login Page] Web View Page is not opened, that means user is not logged in!");
+    }
+
+    @Test()
+    @MethodOwner(owner = "hchekmezov")
+    public void verifyMapFeatureTest() {
+        // 1
+        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPage = welcomePage.clickNextButton();
+        loginPage.typeName(NAME);
+        loginPage.typePassword(PASSWORD);
+        loginPage.checkSexRadioButton(Sex.MALE);
+        loginPage.checkPrivacyCheckbox();
+        WebViewPageBase webViewPage = loginPage.clickSignUpButton();
+        Assert.assertTrue(webViewPage.isOpened(),
+                "[Login Page] Web View Page is not opened after clicking Sign Up Button, " +
+                        "that means user is not logged in!");
+        // 2
+        Assert.assertTrue(webViewPage.isImageButtonPresent(),
+                "[Web View Page] Image Button is not present!");
+        webViewPage.clickImageButton();
+        Assert.assertTrue(webViewPage.isMapButtonPresent(),
+                "[Web View Page] Map Button is not present after clicking Image Button");
+        MapPageBase mapPage = webViewPage.clickMapButton();
+        Assert.assertTrue(mapPage.isOpened(),
+                "[Web View Page] Map Page isn't opened after clicking Map Button");
+        for(ZoomButton it : ZoomButton.values()) {
+            Assert.assertTrue(mapPage.isZoomButtonPresent(it),
+                    String.format("[Map Page] %s zoom button is not present!", it));
+        }
     }
 }
