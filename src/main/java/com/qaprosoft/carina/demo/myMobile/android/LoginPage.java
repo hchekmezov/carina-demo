@@ -68,6 +68,12 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
+    public WebViewPageBase clickSignUpButton() {
+        signUpButton.click();
+        return initPage(getDriver(), WebViewPageBase.class);
+    }
+
+    @Override
     public boolean isOpened() {
         return nameField.isElementPresent() && radioFemale.isElementPresent();
     }
@@ -112,12 +118,6 @@ public class LoginPage extends LoginPageBase {
     @Override
     public boolean isPrivacyCheckboxPresent() {
         return privacyCheckbox.isElementPresent();
-    }
-
-    @Override
-    public WebViewPageBase clickSignUpButton() {
-        signUpButton.click();
-        return initPage(getDriver(), WebViewPageBase.class);
     }
 }
 

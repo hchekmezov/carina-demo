@@ -11,11 +11,7 @@ public abstract class WebViewPageBase extends AbstractPage {
 
     public abstract boolean isOpened();
 
-    public abstract boolean isMapButtonPresent();
+    public abstract boolean isSideMenuButtonPresent();
 
-    public abstract void clickImageButton();
-
-    public abstract MapPageBase clickMapButton();
-
-    public abstract boolean isImageButtonPresent();
+    public abstract SideMenuPageBase clickSideMenuButton();
 }

@@ -18,16 +18,13 @@
 *.apk
 !src/main/resources/carinademoexample.apk
 *.zip
-src/main/resources/_config.properties
+*.properties
 !src/main/resources/carinademoexample.zip
 .settings/*
 target/*
 test-output/*
 reports/*
-/reports
 /.metadata/
-/.classpath
-/.project
 .idea
 *.iml
 /target/

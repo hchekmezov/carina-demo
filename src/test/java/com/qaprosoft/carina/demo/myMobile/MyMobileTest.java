@@ -4,30 +4,29 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
 import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
-import com.qaprosoft.carina.demo.myMobile.common.LoginPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.MapPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.WebViewPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.WelcomePageBase;
+import com.qaprosoft.carina.demo.myMobile.common.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class MyMobileTest implements IAbstractTest, IMobileUtils {
 
     public static final String NAME = "John";
     public static final String PASSWORD = "Doe";
 
-//    @BeforeMethod
-//    public void login() {
-//        WelcomePageBase welcomePageBase = initPage(getDriver(), WelcomePageBase.class);
-//        LoginPageBase loginPageBase = welcomePageBase.clickNextButton();
-//        loginPageBase.typeName(NAME);
-//        loginPageBase.typePassword(PASSWORD);
-//        loginPageBase.checkSexRadioButton(Sex.MALE);
-//        loginPageBase.checkPrivacyCheckbox();
-//        loginPageBase.clickSignUpButton();
-//    }
+    @BeforeMethod
+    public void defaultlogin() {
+        WelcomePageBase welcomePageBase = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPageBase = welcomePageBase.clickNextButton();
+        loginPageBase.typeName(NAME);
+        loginPageBase.typePassword(PASSWORD);
+        loginPageBase.checkSexRadioButton(Sex.MALE);
+        loginPageBase.checkPrivacyCheckbox();
+        loginPageBase.clickSignUpButton();
+    }
 
     @Test(enabled = false)
     @MethodOwner(owner = "hchekmezov")
@@ -37,8 +36,7 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(welcomePage.isOpened(), "[Welcome Page] Welcome Page is not opened!");
         LoginPageBase loginPage = welcomePage.clickNextButton();
         Assert.assertTrue(loginPage.isOpened(),
-                "[Welcome Page] Login Page is not opened after clicking Next Button!");
-        // Login page instead of Welcome Page?
+                "[Login Page] Login Page is not opened after clicking Next Button!");
         // 2
 //        for(LoginFields lf : LoginFields.values()) {
 //            Assert.assertTrue(loginPage.isLoginFieldPresent(lf),
@@ -96,28 +94,26 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
     @MethodOwner(owner = "hchekmezov")
     public void verifyMapFeatureTest() {
         // 1
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
-        LoginPageBase loginPage = welcomePage.clickNextButton();
-        loginPage.typeName(NAME);
-        loginPage.typePassword(PASSWORD);
-        loginPage.checkSexRadioButton(Sex.MALE);
-        loginPage.checkPrivacyCheckbox();
-        WebViewPageBase webViewPage = loginPage.clickSignUpButton();
+        WebViewPageBase webViewPage = initPage(getDriver(), WebViewPageBase.class);
         Assert.assertTrue(webViewPage.isOpened(),
-                "[Login Page] Web View Page is not opened after clicking Sign Up Button, " +
+                "[Web View Page] Web View Page is not opened after clicking Sign Up Button, " +
                         "that means user is not logged in!");
         // 2
-        Assert.assertTrue(webViewPage.isImageButtonPresent(),
-                "[Web View Page] Image Button is not present!");
-        webViewPage.clickImageButton();
-        Assert.assertTrue(webViewPage.isMapButtonPresent(),
-                "[Web View Page] Map Button is not present after clicking Image Button");
-        MapPageBase mapPage = webViewPage.clickMapButton();
+        Assert.assertTrue(webViewPage.isSideMenuButtonPresent(),
+                "[Web View Page] Side Menu Button is not present!");
+        SideMenuPageBase sideMenu = webViewPage.clickSideMenuButton();
+        Assert.assertTrue(sideMenu.isOpened(),
+                "[Side Menu Page] Side Menu Page isn't opened after clicking Side Menu Button");
+        Assert.assertTrue(sideMenu.isMapButtonPresent(),
+                "[Side Menu Page] Map Button is not present after clicking Side Menu Button");
+        MapPageBase mapPage = sideMenu.clickMapButton();
         Assert.assertTrue(mapPage.isOpened(),
-                "[Web View Page] Map Page isn't opened after clicking Map Button");
-        for(ZoomButton it : ZoomButton.values()) {
-            Assert.assertTrue(mapPage.isZoomButtonPresent(it),
-                    String.format("[Map Page] %s zoom button is not present!", it));
+                "[Map Page] Map Page isn't opened after clicking Map Button");
+        SoftAssert softAssert = new SoftAssert();
+        for(ZoomButton zoomButton : ZoomButton.values()) {
+            softAssert.assertTrue(mapPage.isZoomButtonPresent(zoomButton),
+                    String.format("[Map Page] %s zoom button is not present!", zoomButton));
         }
+        softAssert.assertAll();
     }
 }

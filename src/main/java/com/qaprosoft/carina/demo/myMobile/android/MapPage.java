@@ -13,18 +13,15 @@ public class MapPage extends MapPageBase {
     @FindBy(xpath = "//android.widget.TextView[@text='Map']")
     private ExtendedWebElement pageTitle;
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.solvd.carinademoapplication:id/content_frame\"]" +
-            "//android.widget.ImageView[@clickable='false']")
+    @FindBy(xpath = "//android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ImageView")
     private ExtendedWebElement googleImage;
 
-    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"Zoom in\"]")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Zoom in']")
     private ExtendedWebElement zoomInButton;
 
-    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"Zoom out\"]" +
-            "/preceding-sibling::android.widget.ImageView[@content-desc=\"Zoom in\"]")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Zoom out']" +
+            "/preceding-sibling::android.widget.ImageView[@content-desc='Zoom in']")
     private ExtendedWebElement zoomOutButton;
-    // following-sibling – возвращает множество элементов на том же уровне, следующих за текущим.
-    // preceding-sibling – возвращает множество элементов на том же уровне, предшествующих текущему.
 
     public MapPage(WebDriver driver) {
         super(driver);
