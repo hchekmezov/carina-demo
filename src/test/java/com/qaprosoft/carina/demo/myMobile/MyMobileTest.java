@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.myMobile;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
+import com.qaprosoft.carina.demo.myMobile.android.enums.SideMenuButton;
 import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
 import com.qaprosoft.carina.demo.myMobile.common.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
@@ -104,9 +105,9 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
         SideMenuPageBase sideMenu = webViewPage.clickSideMenuButton();
         Assert.assertTrue(sideMenu.isOpened(),
                 "[Side Menu Page] Side Menu Page isn't opened after clicking Side Menu Button");
-        Assert.assertTrue(sideMenu.isMapButtonPresent(),
+        Assert.assertTrue(sideMenu.isButtonOfSideMenuPresent(SideMenuButton.MAP_BUTTON),
                 "[Side Menu Page] Map Button is not present after clicking Side Menu Button");
-        MapPageBase mapPage = sideMenu.clickMapButton();
+        MapPageBase mapPage = (MapPageBase) sideMenu.clickButtonOfSideMenu(SideMenuButton.MAP_BUTTON);
         Assert.assertTrue(mapPage.isOpened(),
                 "[Map Page] Map Page isn't opened after clicking Map Button");
         SoftAssert softAssert = new SoftAssert();
