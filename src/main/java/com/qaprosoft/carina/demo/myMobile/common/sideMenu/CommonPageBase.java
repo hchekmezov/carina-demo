@@ -1,14 +1,12 @@
-package com.qaprosoft.carina.demo.myMobile.common;
+package com.qaprosoft.carina.demo.myMobile.common.sideMenu;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public abstract class UIElementsPageBase extends AbstractPage {
-    public UIElementsPageBase(WebDriver driver) {
+public abstract class CommonPageBase extends AbstractPage {
+    public CommonPageBase(WebDriver driver) {
         super(driver);
     }
-
-    public abstract boolean isOpened();
 
     public abstract boolean isNavigateButtonPresent();
 

@@ -1,9 +1,9 @@
-package com.qaprosoft.carina.demo.myMobile.android;
+package com.qaprosoft.carina.demo.myMobile.android.sideMenu;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.myMobile.android.enums.SideMenuButton;
-import com.qaprosoft.carina.demo.myMobile.common.SideMenuPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.SideMenuPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

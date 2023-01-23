@@ -1,10 +1,10 @@
 package com.qaprosoft.carina.demo.myMobile.android.enums;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.myMobile.common.ChartsPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.MapPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.UIElementsPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.WebViewPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.ChartsPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.MapPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.UIElementsPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.WebViewPageBase;
 
 public enum SideMenuButton {
     WEB_VIEW_BUTTON("Web View", WebViewPageBase.class),
@@ -16,7 +16,7 @@ public enum SideMenuButton {
     private final Class<? extends AbstractPage> baseClass;
 
     SideMenuButton(String pageTitle, Class<? extends AbstractPage> baseClass) {
-        this.pageTitle= pageTitle;
+        this.pageTitle = pageTitle;
         this.baseClass = baseClass;
     }
 

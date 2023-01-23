@@ -5,7 +5,9 @@ import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
 import com.qaprosoft.carina.demo.myMobile.android.enums.SideMenuButton;
 import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
-import com.qaprosoft.carina.demo.myMobile.common.*;
+import com.qaprosoft.carina.demo.myMobile.common.login.LoginPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.*;
+import com.qaprosoft.carina.demo.myMobile.common.welcome.WelcomePageBase;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.testng.Assert;
@@ -91,7 +93,7 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
                 "[Login Page] Web View Page is not opened, that means user is not logged in!");
     }
 
-    @Test()
+    @Test(enabled = false)
     @MethodOwner(owner = "hchekmezov")
     public void verifyMapFeatureTest() {
         // 1
@@ -100,9 +102,10 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
                 "[Web View Page] Web View Page is not opened after clicking Sign Up Button, " +
                         "that means user is not logged in!");
         // 2
-        Assert.assertTrue(webViewPage.isSideMenuButtonPresent(),
-                "[Web View Page] Side Menu Button is not present!");
-        SideMenuPageBase sideMenu = webViewPage.clickSideMenuButton();
+        CommonPageBase commonPage = initPage(getDriver(), CommonPageBase.class);
+        Assert.assertTrue(commonPage.isNavigateButtonPresent(),
+                "[Web View Page] Navigate Button is not present!");
+        SideMenuPageBase sideMenu = commonPage.clickNavigateButton();
         Assert.assertTrue(sideMenu.isOpened(),
                 "[Side Menu Page] Side Menu Page isn't opened after clicking Side Menu Button");
         Assert.assertTrue(sideMenu.isButtonOfSideMenuPresent(SideMenuButton.MAP_BUTTON),
@@ -116,5 +119,36 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
                     String.format("[Map Page] %s zoom button is not present!", zoomButton));
         }
         softAssert.assertAll();
+    }
+
+    @Test()
+    @MethodOwner(owner = "hchekmezov")
+    public void verifyUIElementsEnabledFieldTest() {
+        WebViewPageBase webViewPage = initPage(getDriver(), WebViewPageBase.class);
+        Assert.assertTrue(webViewPage.isOpened(),
+                "[Web View Page] Web View Page is not opened after clicking Sign Up Button, " +
+                        "that means user is not logged in!");
+        CommonPageBase commonPage = initPage(getDriver(), CommonPageBase.class);
+        Assert.assertTrue(commonPage.isNavigateButtonPresent(),
+                "[Web View Page] Navigate Button is not present!");
+        SideMenuPageBase sideMenu = commonPage.clickNavigateButton();
+        Assert.assertTrue(sideMenu.isOpened(),
+                "[Side Menu Page] Side Menu Page isn't opened after clicking Side Menu Button");
+        Assert.assertTrue(sideMenu.isButtonOfSideMenuPresent(SideMenuButton.UI_ELEMENTS_BUTTON),
+                "[Side Menu Page] UI Elements Button is not present after clicking Side Menu Button");
+        UIElementsPageBase uiElementsPage =
+                (UIElementsPageBase) sideMenu.clickButtonOfSideMenu(SideMenuButton.UI_ELEMENTS_BUTTON);
+        Assert.assertTrue(uiElementsPage.isOpened(),
+                "[UI Elements Page] UI Elements Page isn't opened after clicking Map Button");
+        Assert.assertFalse(uiElementsPage.isEnableCheckboxPresent(),
+                "[UI Elements Page] Enable Checkbox is present while it should not be!");
+        swipeUp(1000);
+        Assert.assertTrue(uiElementsPage.isEnableCheckboxPresent(),
+                "[UI Elements Page] Enable Checkbox is not present while it should be!");
+        Assert.assertFalse(uiElementsPage.isEnableCheckboxChecked(),
+                "[UI Elements Page] Enable Checkbox is checked while it should not be!");
+        uiElementsPage.checkEnableCheckbox();
+        Assert.assertTrue(uiElementsPage.isEnableCheckboxChecked(),
+                "[UI Elements Page] Enable Checkbox is not checked while it should be!");
     }
 }

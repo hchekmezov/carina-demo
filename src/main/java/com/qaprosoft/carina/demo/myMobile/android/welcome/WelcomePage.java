@@ -1,8 +1,8 @@
-package com.qaprosoft.carina.demo.myMobile.android;
+package com.qaprosoft.carina.demo.myMobile.android.welcome;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.demo.myMobile.common.LoginPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.WelcomePageBase;
+import com.qaprosoft.carina.demo.myMobile.common.login.LoginPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.welcome.WelcomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

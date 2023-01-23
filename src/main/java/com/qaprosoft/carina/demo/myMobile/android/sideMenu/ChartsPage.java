@@ -1,8 +1,7 @@
-package com.qaprosoft.carina.demo.myMobile.android;
+package com.qaprosoft.carina.demo.myMobile.android.sideMenu;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.demo.myMobile.common.ChartsPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.SideMenuPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.ChartsPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -28,15 +27,5 @@ public class ChartsPage extends ChartsPageBase {
         return pageTitle.isElementPresent() && contentFrame.isElementPresent();
     }
 
-    @Override
-    public boolean isNavigateButtonPresent() {
-        return navigateButton.isElementPresent();
-    }
-
-    @Override
-    public SideMenuPageBase clickNavigateButton() {
-        navigateButton.click();
-        return initPage(getDriver(), SideMenuPageBase.class);
-    }
 
 }

@@ -1,18 +1,14 @@
-package com.qaprosoft.carina.demo.myMobile.android;
+package com.qaprosoft.carina.demo.myMobile.android.sideMenu;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
-import com.qaprosoft.carina.demo.myMobile.common.MapPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.SideMenuPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.MapPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = MapPageBase.class)
 public class MapPage extends MapPageBase {
-
-    @FindBy(xpath = "//android.view.ViewGroup/android.widget.ImageButton")
-    private ExtendedWebElement navigateButton;
 
     @FindBy(xpath = "//android.widget.TextView[@text='Map']")
     private ExtendedWebElement pageTitle;
@@ -45,14 +41,4 @@ public class MapPage extends MapPageBase {
         }
     }
 
-    @Override
-    public boolean isNavigateButtonPresent() {
-        return navigateButton.isElementPresent();
-    }
-
-    @Override
-    public SideMenuPageBase clickNavigateButton() {
-        navigateButton.click();
-        return initPage(getDriver(), SideMenuPageBase.class);
-    }
 }

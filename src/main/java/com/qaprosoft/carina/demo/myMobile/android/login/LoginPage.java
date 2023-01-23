@@ -1,10 +1,10 @@
-package com.qaprosoft.carina.demo.myMobile.android;
+package com.qaprosoft.carina.demo.myMobile.android.login;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
 import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
-import com.qaprosoft.carina.demo.myMobile.common.LoginPageBase;
-import com.qaprosoft.carina.demo.myMobile.common.WebViewPageBase;
+import com.qaprosoft.carina.demo.myMobile.android.enums.LoginField;
+import com.qaprosoft.carina.demo.myMobile.common.login.LoginPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.sideMenu.WebViewPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -52,7 +52,6 @@ public class LoginPage extends LoginPageBase {
             return passwordField.getText();
         }
     }
-
     @Override
     public void checkSexRadioButton(Sex sex) {
         if (sex.equals(Sex.FEMALE)) {

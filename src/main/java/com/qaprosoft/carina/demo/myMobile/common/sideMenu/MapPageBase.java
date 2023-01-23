@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.myMobile.common;
+package com.qaprosoft.carina.demo.myMobile.common.sideMenu;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.myMobile.android.enums.ZoomButton;
@@ -13,7 +13,4 @@ public abstract class MapPageBase extends AbstractPage {
 
     public abstract boolean isZoomButtonPresent(ZoomButton zoomButton);
 
-    public abstract boolean isNavigateButtonPresent();
-
-    public abstract SideMenuPageBase clickNavigateButton();
 }
