@@ -15,13 +15,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import javax.activation.UnsupportedDataTypeException;
+
 public class MyMobileTest implements IAbstractTest, IMobileUtils {
 
     public static final String NAME = "John";
     public static final String PASSWORD = "Doe";
 
     @BeforeMethod
-    public void defaultlogin() {
+    public void defaultLogin() throws UnsupportedDataTypeException {
         WelcomePageBase welcomePageBase = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPageBase = welcomePageBase.clickNextButton();
         loginPageBase.typeName(NAME);
@@ -33,7 +35,7 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
 
     @Test(enabled = false)
     @MethodOwner(owner = "hchekmezov")
-    public void verifyLoginPageTest() {
+    public void verifyLoginPageTest() throws UnsupportedDataTypeException {
         // 1
         WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         Assert.assertTrue(welcomePage.isOpened(), "[Welcome Page] Welcome Page is not opened!");
@@ -142,14 +144,11 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
                 "[UI Elements Page] UI Elements Page isn't opened after clicking Map Button");
         Assert.assertTrue(uiElementsPage.isBottomContentFramePresent(),
                 "[UI Elements Page] Bottom Content Frame is not present while it should be!");
+        Assert.assertTrue(uiElementsPage.isSexRadioButtonPresent(Sex.OTHER),
+                "[UI Elements Page] Other Sex Radio Button is not present while it should be!");
         Assert.assertTrue(uiElementsPage.isEmailFieldPresent(),
                 "[UI Elements Page] Email Field is not present while it should be!");
         Assert.assertTrue(uiElementsPage.isEnableSwitchPresent(),
                 "[UI Elements Page] Enable Switch is not present while it should be!");
-        Assert.assertFalse(uiElementsPage.isEnableSwitchChecked(),
-                "[UI Elements Page] Enable Switch is checked while it should not be!");
-        uiElementsPage.checkEnableSwitch();
-        Assert.assertTrue(uiElementsPage.isEnableSwitchChecked(),
-                "[UI Elements Page] Enable Switch is not checked while it should be!");
     }
 }

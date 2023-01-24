@@ -9,6 +9,8 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import javax.activation.UnsupportedDataTypeException;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase {
 
@@ -58,11 +60,13 @@ public class LoginPage extends LoginPageBase {
      * @param sex a parameter of Sex Enum, Sex.OTHER unsupported
      */
     @Override
-    public void checkSexRadioButton(Sex sex) {
+    public void checkSexRadioButton(Sex sex) throws UnsupportedDataTypeException {
         if (sex.equals(Sex.FEMALE)) {
             radioFemale.check();
         } else if (sex.equals(Sex.MALE)) {
             radioMale.check();
+        } else {
+            throw new UnsupportedDataTypeException("You can't use " + Sex.OTHER + " value here!");
         }
     }
 
@@ -88,11 +92,13 @@ public class LoginPage extends LoginPageBase {
      * @return true if sex radio button checked and false if not
      */
     @Override
-    public boolean isSexRadioButtonChecked(Sex sex) {
+    public boolean isSexRadioButtonChecked(Sex sex) throws UnsupportedDataTypeException {
         if (sex.equals(Sex.MALE)) {
             return radioMale.isChecked();
-        } else {
+        } else if (sex.equals(Sex.FEMALE)) {
             return radioFemale.isChecked();
+        } else {
+            throw new UnsupportedDataTypeException("You can't use " + Sex.OTHER + " value here!");
         }
     }
 
@@ -112,11 +118,13 @@ public class LoginPage extends LoginPageBase {
      * @return true if sex radio button present and false if not
      */
     @Override
-    public boolean isSexRadioButtonPresent(Sex sex) {
+    public boolean isSexRadioButtonPresent(Sex sex) throws UnsupportedDataTypeException {
         if (sex.equals(Sex.MALE)) {
             return radioMale.isElementPresent();
-        } else {
+        } else if (sex.equals(Sex.FEMALE)) {
             return radioFemale.isElementPresent();
+        } else {
+            throw new UnsupportedDataTypeException("You can't use " + Sex.OTHER + " value here!");
         }
     }
 

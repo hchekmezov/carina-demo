@@ -6,6 +6,8 @@ import com.qaprosoft.carina.demo.myMobile.android.enums.Sex;
 import com.qaprosoft.carina.demo.myMobile.common.sideMenu.WebViewPageBase;
 import org.openqa.selenium.WebDriver;
 
+import javax.activation.UnsupportedDataTypeException;
+
 public abstract class LoginPageBase extends AbstractPage {
 
     public LoginPageBase(WebDriver driver) {
@@ -16,13 +18,13 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract boolean isOpened();
 
-    public abstract boolean isSexRadioButtonChecked(Sex sex);
+    public abstract boolean isSexRadioButtonChecked(Sex sex) throws UnsupportedDataTypeException;
 
     public abstract boolean isPrivacyCheckboxChecked();
 
     public abstract boolean isSignUpButtonEnabled();
 
-    public abstract boolean isSexRadioButtonPresent(Sex sex);
+    public abstract boolean isSexRadioButtonPresent(Sex sex) throws UnsupportedDataTypeException;
 
     public abstract boolean isLoginFieldPresent(LoginField loginField);
 
@@ -34,7 +36,7 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract void typePassword(String password);
 
-    public abstract void checkSexRadioButton(Sex sex);
+    public abstract void checkSexRadioButton(Sex sex) throws UnsupportedDataTypeException;
 
     public abstract void checkPrivacyCheckbox();
 }
