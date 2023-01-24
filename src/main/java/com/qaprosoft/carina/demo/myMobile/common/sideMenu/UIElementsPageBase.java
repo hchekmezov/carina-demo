@@ -10,9 +10,13 @@ public abstract class UIElementsPageBase extends AbstractPage {
 
     public abstract boolean isOpened();
 
-    public abstract boolean isEnableCheckboxPresent();
+    public abstract boolean isEnableSwitchPresent();
 
-    public abstract boolean isEnableCheckboxChecked();
+    public abstract boolean isEnableSwitchChecked();
 
-    public abstract void checkEnableCheckbox();
+    public abstract boolean isEmailFieldPresent();
+
+    public abstract boolean isBottomContentFramePresent();
+
+    public abstract void checkEnableSwitch();
 }

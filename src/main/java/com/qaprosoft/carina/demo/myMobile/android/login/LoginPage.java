@@ -52,6 +52,11 @@ public class LoginPage extends LoginPageBase {
             return passwordField.getText();
         }
     }
+
+    /**
+     *
+     * @param sex a parameter of Sex Enum, Sex.OTHER unsupported
+     */
     @Override
     public void checkSexRadioButton(Sex sex) {
         if (sex.equals(Sex.FEMALE)) {
@@ -77,6 +82,11 @@ public class LoginPage extends LoginPageBase {
         return nameField.isElementPresent() && radioFemale.isElementPresent();
     }
 
+    /**
+     * Sex.OTHER = Sex.FEMALE in this method
+     * @param sex a parameter of Sex Enum
+     * @return true if sex radio button checked and false if not
+     */
     @Override
     public boolean isSexRadioButtonChecked(Sex sex) {
         if (sex.equals(Sex.MALE)) {
@@ -96,6 +106,11 @@ public class LoginPage extends LoginPageBase {
         return Boolean.parseBoolean(signUpButton.getAttribute("enabled"));
     }
 
+    /**
+     * Sex.OTHER = Sex.FEMALE in this method
+     * @param sex a parameter of Sex Enum
+     * @return true if sex radio button present and false if not
+     */
     @Override
     public boolean isSexRadioButtonPresent(Sex sex) {
         if (sex.equals(Sex.MALE)) {

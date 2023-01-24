@@ -140,15 +140,16 @@ public class MyMobileTest implements IAbstractTest, IMobileUtils {
                 (UIElementsPageBase) sideMenu.clickButtonOfSideMenu(SideMenuButton.UI_ELEMENTS_BUTTON);
         Assert.assertTrue(uiElementsPage.isOpened(),
                 "[UI Elements Page] UI Elements Page isn't opened after clicking Map Button");
-        Assert.assertFalse(uiElementsPage.isEnableCheckboxPresent(),
-                "[UI Elements Page] Enable Checkbox is present while it should not be!");
-        swipeUp(1000);
-        Assert.assertTrue(uiElementsPage.isEnableCheckboxPresent(),
-                "[UI Elements Page] Enable Checkbox is not present while it should be!");
-        Assert.assertFalse(uiElementsPage.isEnableCheckboxChecked(),
-                "[UI Elements Page] Enable Checkbox is checked while it should not be!");
-        uiElementsPage.checkEnableCheckbox();
-        Assert.assertTrue(uiElementsPage.isEnableCheckboxChecked(),
-                "[UI Elements Page] Enable Checkbox is not checked while it should be!");
+        Assert.assertTrue(uiElementsPage.isBottomContentFramePresent(),
+                "[UI Elements Page] Bottom Content Frame is not present while it should be!");
+        Assert.assertTrue(uiElementsPage.isEmailFieldPresent(),
+                "[UI Elements Page] Email Field is not present while it should be!");
+        Assert.assertTrue(uiElementsPage.isEnableSwitchPresent(),
+                "[UI Elements Page] Enable Switch is not present while it should be!");
+        Assert.assertFalse(uiElementsPage.isEnableSwitchChecked(),
+                "[UI Elements Page] Enable Switch is checked while it should not be!");
+        uiElementsPage.checkEnableSwitch();
+        Assert.assertTrue(uiElementsPage.isEnableSwitchChecked(),
+                "[UI Elements Page] Enable Switch is not checked while it should be!");
     }
 }
