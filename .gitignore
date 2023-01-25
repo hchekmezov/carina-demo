@@ -17,6 +17,8 @@
 *.log
 *.apk
 !src/main/resources/carinademoexample.apk
+!src/main/resources/_config.properties
+src/main/resources/_config.properties
 *.zip
 *.properties
 !src/main/resources/carinademoexample.zip
