@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo.myMobile.enums;
 
 public enum DiscountPercent {
     THREE_PERCENT("3%"),
+    SEVENTEEN_PERCENT("17%"),
     TWENTY_PERCENT("20%"),
     THIRTY_FIVE_PERCENT("35%"),
     THIRTY_NINE_PERCENT("39%"),
