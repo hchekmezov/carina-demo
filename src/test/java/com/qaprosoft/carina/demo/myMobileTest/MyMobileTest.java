@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo.myMobileTest;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.myMobile.common.*;
+import com.qaprosoft.carina.demo.myMobile.enums.BottomBarButton;
 import com.qaprosoft.carina.demo.myMobile.enums.DiscountPercent;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
@@ -91,12 +92,14 @@ public class MyMobileTest implements IMobileUtils, IAbstractTest {
         Assert.assertTrue(searchPage.isSearchFieldPresent(),
                 "[Search Page] Search Field for typing is not present after clicking on Search Bar!");
         searchPage.typeToSearchField(PRODUCT);
+        Assert.assertFalse(searchPage.getBottomBar().isClickable(BottomBarButton.SEARCH),
+                "[Bottom Bar] Search Button is clickable while it should not be!");
         ProductPageBase productPage = searchPage.openProductPage();
         Assert.assertTrue(productPage.isOpened(),
                 "[Product Page] Product Page is not opened!");
     }
 
-    @Test()
+    @Test(enabled = true)
     @MethodOwner(owner = "hchekmezov")
     public void addToFavoritesTest() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);

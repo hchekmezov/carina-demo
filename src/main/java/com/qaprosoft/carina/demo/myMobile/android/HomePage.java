@@ -1,10 +1,12 @@
 package com.qaprosoft.carina.demo.myMobile.android;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.demo.myMobile.android.components.BottomBar;
 import com.qaprosoft.carina.demo.myMobile.android.components.ProductBox;
 import com.qaprosoft.carina.demo.myMobile.common.HomePageBase;
 import com.qaprosoft.carina.demo.myMobile.common.ProductPageBase;
 import com.qaprosoft.carina.demo.myMobile.common.SearchPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.components.BottomBarBase;
 import com.qaprosoft.carina.demo.myMobile.common.components.ProductBoxBase;
 import com.qaprosoft.carina.demo.myMobile.enums.DiscountPercent;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -16,6 +18,7 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends HomePageBase implements IMobileUtils {
 
     private final ProductBoxBase productBox;
+    private final BottomBarBase bottomBar;
 
     @FindBy(id = "com.joom:id/tabs")
     private ExtendedWebElement tabs;
@@ -38,6 +41,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     public HomePage(WebDriver driver) {
         super(driver);
         productBox = new ProductBox(driver);
+        bottomBar = new BottomBar(driver);
     }
 
     @Override
@@ -75,6 +79,11 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @Override
     public boolean isAddToFavoritesClicked() {
         return productBox.isAddToFavoritesClicked();
+    }
+
+    @Override
+    public BottomBarBase getBottomBar() {
+        return bottomBar;
     }
 
     @Override

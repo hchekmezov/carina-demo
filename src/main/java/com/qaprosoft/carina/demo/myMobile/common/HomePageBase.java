@@ -1,6 +1,7 @@
 package com.qaprosoft.carina.demo.myMobile.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.qaprosoft.carina.demo.myMobile.common.components.BottomBarBase;
 import com.qaprosoft.carina.demo.myMobile.enums.DiscountPercent;
 import org.openqa.selenium.WebDriver;
 
@@ -22,6 +23,8 @@ public abstract class HomePageBase extends AbstractPage {
     public abstract boolean isSearchBarPresent();
 
     public abstract boolean isAddToFavoritesClicked();
+
+    public abstract BottomBarBase getBottomBar();
 
     public abstract SearchPageBase clickSearchBar();
 

@@ -1,9 +1,11 @@
 package com.qaprosoft.carina.demo.myMobile.android;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.demo.myMobile.android.components.BottomBar;
 import com.qaprosoft.carina.demo.myMobile.android.components.ProductBox;
 import com.qaprosoft.carina.demo.myMobile.common.ProductPageBase;
 import com.qaprosoft.carina.demo.myMobile.common.SearchPageBase;
+import com.qaprosoft.carina.demo.myMobile.common.components.BottomBarBase;
 import com.qaprosoft.carina.demo.myMobile.common.components.ProductBoxBase;
 import com.zebrunner.carina.utils.android.IAndroidUtils;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -16,6 +18,8 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = SearchPageBase.class)
 public class SearchPage extends SearchPageBase implements IMobileUtils, IAndroidUtils {
     private final ProductBoxBase productBox;
+
+    private final BottomBarBase bottomBar;
 
     @FindBy(id = "com.joom:id/search")
     private ExtendedWebElement searchBar;
@@ -32,6 +36,7 @@ public class SearchPage extends SearchPageBase implements IMobileUtils, IAndroid
     public SearchPage(WebDriver driver) {
         super(driver);
         productBox = new ProductBox(driver);
+        bottomBar = new BottomBar(driver);
     }
 
     @Override
@@ -47,6 +52,11 @@ public class SearchPage extends SearchPageBase implements IMobileUtils, IAndroid
     @Override
     public boolean isSearchFieldPresent() {
         return searchFieldForInput.isElementPresent();
+    }
+
+    @Override
+    public BottomBarBase getBottomBar() {
+        return bottomBar;
     }
 
     @Override
@@ -66,7 +76,6 @@ public class SearchPage extends SearchPageBase implements IMobileUtils, IAndroid
         int x = (int) ((double)dimension.getWidth() * 0.915);
         int y = (int) (((double)dimension.getHeight() * 0.945));
         tap(x, y, 1);
-        pressBottomRightKey();
     }
 
     @Override
