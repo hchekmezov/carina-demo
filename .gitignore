@@ -4,6 +4,7 @@
 *.jar
 *.war
 *.ear
+src/main/resources/_testdata.properties
 /.project
 /.settings
 /reports
@@ -27,5 +28,4 @@ reports/*
 .idea
 *.iml
 /target/
-*.properties
 /bin/
