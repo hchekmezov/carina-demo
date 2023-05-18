@@ -24,6 +24,11 @@ jobs:
           appium -v
           appium &>/dev/null &
 
+      - name: run adb-kill
+        run: adb kill-server
+      - name: run adb-start
+        run: adb start-server
+
       - name: run appium android tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
