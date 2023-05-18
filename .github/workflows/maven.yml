@@ -1,34 +1,29 @@
-name: Java CI with Maven
+name: Run android tests in github runner
 
-on:
-  push:
-    branches: [ mobile ]
-  pull_request:
-    branches: [ mobile ]
+on: workflow_dispatch
 
 jobs:
-  build:
+  run-mobile-tests:
     runs-on: macos-latest
 
     steps:
-      - name: Setup java
+      - name: setup java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Pull the project in to the runner
+      - name: pull the project in to the runner
         uses: actions/checkout@v3
 
-      - name: Setup appium
+      - name: setup appium
         run: |
           npm install -g appium@v1.22
           appium -v
           appium &>/dev/null &
 
-      - name: Run appium android tests
+      - name: run appium android tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: mvn clean test -Dsuite=android
-
