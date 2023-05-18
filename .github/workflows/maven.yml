@@ -1,6 +1,10 @@
-name: Run android tests in github runner
+name: run android tests in github runner
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [ mobile ]
+  pull_request:
+    branches: [ mobile ]
 
 jobs:
   run-mobile-tests:
@@ -27,3 +31,4 @@ jobs:
         with:
           api-level: 29
           script: mvn clean test -Dsuite=android
+
