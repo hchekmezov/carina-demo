@@ -3,8 +3,6 @@ name: run android tests in github runner
 on:
   push:
     branches: [ mobile ]
-  pull_request:
-    branches: [ mobile ]
 
 jobs:
   run-mobile-tests:
