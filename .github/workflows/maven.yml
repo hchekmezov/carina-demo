@@ -2,9 +2,10 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ mfp-branch ]
-  pull_request:
-    branches: [ mfp-branch ]
+    branches:
+      - mfp-branch
+  workflow_dispatch:
+
 
 jobs:
   build:
