@@ -1,9 +1,8 @@
 name: CRON
 
-on:
-  schedule:
-    # Runs "at minute 55 past every hour" (see https://crontab.guru)
-    - cron: '*/6 * * * *'
+on: push
+#   schedule:
+#     - cron: '*/6 * * * *'
 
 jobs:
   test:
