@@ -1,0 +1,22 @@
+name: CRON
+
+on:
+  schedule:
+     - cron: '31 11 * * ?'  # every day, 11 31
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Build and Run Java Tests
+        run: mvn clean test
