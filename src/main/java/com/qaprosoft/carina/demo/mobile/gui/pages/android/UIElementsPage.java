@@ -111,4 +111,12 @@ public class UIElementsPage extends UIElementsPageBase implements IMobileUtils {
         swipe(femaleRadioButton, container, 10);
     }
 
+    public void swipeToMaleRadioButton() {
+        swipe(maleRadioButton, container, 10);
+    }
+
+    public void swipeToOtherRadioButton() {
+        swipe(otherRadioButton, container, 10);
+    }
+
 }

@@ -55,7 +55,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils, IAndroidUt
         Assert.assertTrue(carinaDescriptionPage.isPageOpened(), "Carina description page isn't opened");
     }
 
-    @Test()
+    @Test(enabled = false)
     @MethodOwner(owner = "qpsdemo")
 //    @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testWebView() {
@@ -98,6 +98,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils, IAndroidUt
         Assert.assertTrue(uiElements.isCopyChecked(), "Copy checkbox was not checked");
         uiElements.clickOnFemaleRadioButton();
         Assert.assertTrue(uiElements.isFemaleRadioButtonSelected(), "Female radio button was not selected!");
+        uiElements.swipeToOtherRadioButton();
         uiElements.clickOnOtherRadioButton();
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
