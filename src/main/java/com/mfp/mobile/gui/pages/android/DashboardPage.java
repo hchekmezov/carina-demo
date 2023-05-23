@@ -15,7 +15,7 @@ public class DashboardPage extends DashboardPageBase {
         super(driver);
     }
 
-    @FindBy(xpath = "//android.view.View[@content-desc='User avatar']")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"User avatar\"]")
     private ExtendedWebElement userAvatar;
 
     @Override

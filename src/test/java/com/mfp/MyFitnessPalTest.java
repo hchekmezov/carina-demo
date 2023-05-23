@@ -128,8 +128,10 @@ public class MyFitnessPalTest implements IAbstractTest, IMobileUtils {
         SoftAssert softAssert = new SoftAssert();
         // 1
         MFPCommonPageBase mfpCommonPage = initPage(getDriver(), MFPCommonPageBase.class);
-        DashboardPageBase dashboardPage = mfpCommonPage.login(R.TESTDATA.get("email"),
-                R.TESTDATA.get("password"));
+//        DashboardPageBase dashboardPage = mfpCommonPage.login(R.TESTDATA.get("email"),
+//                R.TESTDATA.get("password"));
+        DashboardPageBase dashboardPage = mfpCommonPage.login(System.getProperty("username"),
+                System.getProperty("password"));
         Assert.assertTrue(dashboardPage.isOpened(),
                 "[Dashboard Page] Dashboard Page is not opened after logging in!");
         DiaryPageBase diaryPage = (DiaryPageBase) mfpCommonPage.getBottomNavigateBar().

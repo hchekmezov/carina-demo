@@ -28,4 +28,4 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: mvn clean test -Dsuite=android
+          script: mvn clean test -Dsuite=android -Dusername=${{ secrets.TEST_EMAIL }} -Dpassword=${{ secrets.TEST_PASSWORD }}
