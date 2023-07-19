@@ -16,4 +16,6 @@ public abstract class LogInPageBase extends AbstractPage {
 
     public abstract boolean isLogInButtonEnabled();
 
+    public abstract ForgotPasswordPageBase clickForgotPasswordButton();
+
 }

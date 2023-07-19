@@ -1,9 +1,6 @@
 package com.mfp.mobile.gui.pages.android;
 
-import com.mfp.mobile.gui.pages.common.DashboardPageBase;
-import com.mfp.mobile.gui.pages.common.ExistingUserTutorialPageBase;
-import com.mfp.mobile.gui.pages.common.LogInPageBase;
-import com.mfp.mobile.gui.pages.common.MFPCommonPageBase;
+import com.mfp.mobile.gui.pages.common.*;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +22,9 @@ public class LogInPage extends LogInPageBase {
 
     @FindBy(id = "com.myfitnesspal.android:id/password_edit")
     private ExtendedWebElement passwordField;
+
+    @FindBy(id = "com.myfitnesspal.android:id/forgot_password_button")
+    private ExtendedWebElement forgotPasswordButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/login_button")
     private ExtendedWebElement logInButton;
@@ -59,5 +59,11 @@ public class LogInPage extends LogInPageBase {
     @Override
     public boolean isLogInButtonEnabled() {
         return Boolean.parseBoolean(logInButton.getAttribute("enabled"));
+    }
+
+    @Override
+    public ForgotPasswordPageBase clickForgotPasswordButton() {
+        forgotPasswordButton.click();
+        return initPage(driver, ForgotPasswordPageBase.class);
     }
 }

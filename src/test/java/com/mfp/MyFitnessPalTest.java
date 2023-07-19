@@ -1,5 +1,6 @@
 package com.mfp;
 
+import com.mfp.mobile.gui.pages.android.PreviewPage;
 import com.mfp.mobile.gui.pages.common.*;
 import com.mfp.mobile.gui.pages.common.BottomNavigationBarItem;
 import com.mfp.mobile.gui.pages.common.diary.*;
@@ -128,10 +129,10 @@ public class MyFitnessPalTest implements IAbstractTest, IMobileUtils {
         SoftAssert softAssert = new SoftAssert();
         // 1
         MFPCommonPageBase mfpCommonPage = initPage(getDriver(), MFPCommonPageBase.class);
-//        DashboardPageBase dashboardPage = mfpCommonPage.login(R.TESTDATA.get("email"),
-//                R.TESTDATA.get("password"));
-        DashboardPageBase dashboardPage = mfpCommonPage.login(System.getProperty("username"),
-                System.getProperty("password"));
+        DashboardPageBase dashboardPage = mfpCommonPage.login(R.TESTDATA.get("email"),
+                R.TESTDATA.get("password"));
+//        DashboardPageBase dashboardPage = mfpCommonPage.login(System.getProperty("username"),
+//                System.getProperty("password"));
         Assert.assertTrue(dashboardPage.isOpened(),
                 "[Dashboard Page] Dashboard Page is not opened after logging in!");
         DiaryPageBase diaryPage = (DiaryPageBase) mfpCommonPage.getBottomNavigateBar().
@@ -178,5 +179,26 @@ public class MyFitnessPalTest implements IAbstractTest, IMobileUtils {
                 "[Custom Summary Page] The text doesn't match!");
         Assert.assertFalse(customSummaryPage.isSaveButtonEnabled(),
                 "[Custom Summary Page] Save button is active while it should not be!");
+    }
+
+
+    @Test()
+    @MethodOwner(owner = "hchekmezov")
+    public void forgotPasswordTest() {
+        MFPCommonPageBase mfpCommonPage = initPage(getDriver(), MFPCommonPageBase.class);
+        PreviewPageBase previewPage = initPage(getDriver(), PreviewPageBase.class);
+        Assert.assertTrue(previewPage.isOpened(), "[Preview Page] Preview Page is not opened!");
+        LogInPageBase logInPage = previewPage.clickLogInButton();
+        Assert.assertTrue(logInPage.isOpened(), "[LogIn Page] LogIn Page is not opened!");
+        ForgotPasswordPageBase forgotPasswordPage = logInPage.clickForgotPasswordButton();
+        Assert.assertTrue(forgotPasswordPage.isOpened(), "[Forgot Password Page] Forgot Password Page " +
+                "is not opened!");
+        forgotPasswordPage.typeEmail(R.TESTDATA.get("email"));
+        forgotPasswordPage.clickSubmitButton();
+        Assert.assertTrue(forgotPasswordPage.isConfirmationMessagePanelDisplayed(), "[Forgot Password Page] " +
+                "Confirmation Message Panel is not displayed!");
+        logInPage = forgotPasswordPage.clickConfirmationMessagePanelOkButton();
+        Assert.assertTrue(logInPage.isOpened(), "[LogIn Page] LogIn Page is not opened after clicking OK " +
+                "button on confirmation message panel!");
     }
 }
