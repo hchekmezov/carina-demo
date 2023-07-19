@@ -4,7 +4,8 @@
 *.jar
 *.war
 *.ear
-src/main/resources/_testdata.properties
+#/src/main/resources/_testdata.properties
+*.properties
 /.project
 /.settings
 /reports
