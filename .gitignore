@@ -4,8 +4,6 @@
 *.jar
 *.war
 *.ear
-#/src/main/resources/_testdata.properties
-*.properties
 /.project
 /.settings
 /reports
@@ -30,3 +28,7 @@ reports/*
 *.iml
 /target/
 /bin/
+
+/src/main/resources/_config.properties
+/src/main/resources/_testdata.properties
+/src/main/resources/agent.properties
